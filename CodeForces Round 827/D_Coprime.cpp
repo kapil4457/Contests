@@ -13,23 +13,29 @@ int main()
     while (t--)
     {
 
-        int n;
-        cin >> n;
-        int arr[n];
+        int n, x;
 
-        for (int i = 0; i < n; i++)
+        cin >> n;
+        vector<int> a(1001, -1);
+
+        for (int i = 1; i <= n; i++)
         {
-            cin >> arr[i];
+            cin >> x;
+            a[x] = i;
         }
 
         int ans = -1;
-        for (int i = 0; i < n; i++)
+
+        for (int i = 1; i < 1001; i++)
         {
-            for (int j = i; j < n; j++)
+            if (a[i] != -1)
             {
-                if (__gcd(arr[i], arr[j]) == 1)
+                for (int j = 1; j < 1001; j++)
                 {
-                    ans = max(ans, (i + j + 2));
+                    if (a[j] != -1 && __gcd(a[i], a[j]) == 1)
+                    {
+                        ans = max(ans, a[i] + a[j]);
+                    }
                 }
             }
         }
