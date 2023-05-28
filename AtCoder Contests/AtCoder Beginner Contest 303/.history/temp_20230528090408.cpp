@@ -1,0 +1,97 @@
+#include <bits/stdc++.h>
+#define ll long long int
+#define pb push_back
+#define mod 1000000007ll //998244353ll
+#define mii map<int, int>
+#define pii pair<int, int>
+#define TEST int t=1;;while(t--)
+int power(int a,int b){int result =1; while(b>0){if(b%2) result*=a; a*=a;b/=2;} return result;}
+using namespace std;
+
+
+int calculateValue(vector<vector<int>>&grid , int i , int  j , int n , int m){
+
+int leftTopVal = 0;
+int rightBottomVal = 0;
+
+set<int>s1 , s2;
+
+int tempI = i-1 , tempJ = j-1;
+
+while(tempI>=0 && tempJ >=0){
+    s1.insert(grid[tempI][tempJ]);
+    tempI--;
+    tempJ--;
+}
+
+tempI = i+1 , tempJ = j+1;
+
+while(tempI<n && tempJ <m){
+    s2.insert(grid[tempI][tempJ]);
+    tempI++;
+    tempJ++;
+}
+
+leftTopVal  = s1.size();
+rightBottomVal = s2.size();
+return abs(leftTopVal - rightBottomVal);
+
+}
+
+
+
+  vector<vector<int>> differenceOfDistinctValues(vector<vector<int>>& grid) {
+        
+int n  =grid.size();
+int m = grid[0].size();
+
+
+vector<vector<int>>ans(n , vector<int>(m));
+
+for(int i =0 ; i < n ; i ++){
+    for(int j =0 ;  j < m ; j ++){
+
+        ans[i][j]  = calculateValue(grid , i , j , n , m);
+    }
+}
+
+return ans;
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+void Solve(){
+vector<vector<int>>grid = {{1,2,3},{3,1,5},{3,2,1}};
+vector<vector<int>>ans = differenceOfDistinctValues(grid);
+
+
+int n = ans.size();
+int m = ans[0].size();
+                                                                                                                                                                      
+
+for(int i =0 ; i < n ; i ++){
+    for(int j =0  ; j < m ;  j ++){
+        cout<<ans[i][j]<<" ";
+    }
+
+    cout<<endl;
+}
+}
+int main()
+{
+TEST {
+Solve();
+}
+ return 0;
+}
