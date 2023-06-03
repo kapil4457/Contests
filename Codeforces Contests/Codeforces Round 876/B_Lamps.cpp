@@ -12,7 +12,7 @@ using namespace std;
 
 class Comparator{
 public : 
-    bool operator()(pair<int,int>a , pair<int,int>b){
+    bool operator()(pair<ll,ll>a , pair<ll,ll>b){
 
 if(a.first == b.first){
 if(a.second > b.second)return true;
@@ -26,7 +26,7 @@ return false;
 
 class PQComp{
     public : 
-    bool operator()(pair<pair<int,int> , int>a , pair<pair<int,int> , int>b){
+    bool operator()(pair<pair<ll,ll> , ll>a , pair<pair<ll,ll> , ll>b){
         if(a.first.first > b.first.first)return true;
 
         return false;
@@ -34,13 +34,13 @@ class PQComp{
 };
 
 void Solve(){
-int n=6;
+ll n=6;
 cin>>n;
-// vector<pair<int,int>>v = {{1,2} , {3,4}, {1,4} , {3,4} , {3,5} , {2,3}};
-vector<pair<int,int>>v(n);
+// vector<pair<ll,ll>>v = {{1,2} , {3,4}, {1,4} , {3,4} , {3,5} , {2,3}};
+vector<pair<ll,ll>>v(n);
 
-pair<int,int>temp;
-for(int i =0 ; i < n ; i ++){
+pair<ll,ll>temp;
+for(ll i =0 ; i < n ; i ++){
 cin>>temp.first>>temp.second;
 v[i] = temp;
 }
@@ -52,20 +52,20 @@ sort(v.begin() , v.end() , Comparator());
 // -1 ==> broken
 //  0 ==> OFF
 //  1 ==> ON
-vector<int>broken(n , 0);
-int ans = 0;
-int bulbsON = 0 ;
+vector<ll>broken(n , 0);
+ll ans = 0;
+ll bulbsON = 0 ;
 
 
 // Smallest 'a' comes first
-priority_queue<pair<pair<int,int> , int> , vector<pair<pair<int,int> , int>>  , PQComp >pq;
+priority_queue<pair<pair<ll,ll> , ll> , vector<pair<pair<ll,ll> , ll>>  , PQComp >pq;
 
-for(int i = 0 ; i < n ; i ++){
+for(ll i = 0 ; i < n ; i ++){
     pq.push({ v[i] ,  i });
 }
 
 
-int i =0 ;
+ll i =0 ;
 while(!pq.empty() && i < n){
 
 
@@ -77,7 +77,7 @@ bulbsON++;
 
 i++;
 
-int cnt =0;
+ll cnt =0;
 while(!pq.empty() && pq.top().first.first <= bulbsON){
 
 
